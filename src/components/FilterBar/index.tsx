@@ -7,7 +7,7 @@ import { getBusinessStatusText } from '@/utils/format';
 
 export default function FilterBar() {
   const { filters, setDistance, setCuisine, setPriceRange, setBusinessStatus, resetFilters } = useFilterStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'distance' | 'cuisine' | 'price' | 'status'>('distance');
 
   const statusOptions: BusinessStatus[] = ['open', 'busy', 'closed'];

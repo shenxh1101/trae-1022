@@ -15,7 +15,7 @@ const navItems = [
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const { setSearchKeyword } = useFilterStore();
+  const { filters, setSearchKeyword } = useFilterStore();
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -55,6 +55,7 @@ export default function Layout({ children }: LayoutProps) {
                   type="text"
                   placeholder="搜索餐厅、菜品..."
                   className="input-base pl-12 pr-4 py-2.5"
+                  value={filters.searchKeyword}
                   onChange={handleSearch}
                 />
               </div>
@@ -121,6 +122,7 @@ export default function Layout({ children }: LayoutProps) {
               type="text"
               placeholder="搜索餐厅、菜品..."
               className="input-base pl-12 pr-4 py-2.5"
+              value={filters.searchKeyword}
               onChange={handleSearch}
             />
           </div>
