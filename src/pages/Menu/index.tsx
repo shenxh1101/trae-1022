@@ -14,7 +14,7 @@ export default function Menu() {
   const navigate = useNavigate();
   const { getRestaurantById, getMenuByRestaurantId, getMenuItemById } = useRestaurantStore();
   const { sortBy, sortOrder } = useFilterStore();
-  const { currentPlan, addDish, removeDish } = usePlanStore();
+  const { currentPlan, initPlan, addDish, removeDish, setRestaurant } = usePlanStore();
   const [activeCategory, setActiveCategory] = useState('全部');
 
   const restaurant = id ? getRestaurantById(id) : undefined;
@@ -23,6 +23,10 @@ export default function Menu() {
 
   const selectedDishes = currentPlan?.selectedDishes || [];
   const isDishSelected = (dishId: string) => selectedDishes.includes(dishId);
+
+  useEffect(() => {
+    initPlan();
+  }, [initPlan]);
 
   useEffect(() => {
     if (!restaurant) {
@@ -34,6 +38,9 @@ export default function Menu() {
     if (isDishSelected(dishId)) {
       removeDish(dishId);
     } else {
+      if (id && currentPlan?.restaurantId !== id) {
+        setRestaurant(id, false);
+      }
       addDish(dishId);
     }
   };

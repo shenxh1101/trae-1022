@@ -28,6 +28,14 @@ export default function DiningPlan() {
     initPlan();
   }, [initPlan]);
 
+  useEffect(() => {
+    if (currentPlan?.dateTime) {
+      const [date, time] = currentPlan.dateTime.split('T');
+      setSelectedDate(date);
+      setSelectedTime(time);
+    }
+  }, [currentPlan?.dateTime]);
+
   const restaurant = currentPlan?.restaurantId
     ? getRestaurantById(currentPlan.restaurantId)
     : undefined;

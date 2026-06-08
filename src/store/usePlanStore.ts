@@ -6,7 +6,7 @@ import { getDiningPlan, saveDiningPlan, clearDiningPlan } from '@/utils/storage'
 interface PlanState {
   currentPlan: DiningPlan | null;
   initPlan: () => void;
-  setRestaurant: (id: string) => void;
+  setRestaurant: (id: string, clearDishes?: boolean) => void;
   setPeopleCount: (count: number) => void;
   setDateTime: (datetime: string) => void;
   addDish: (dishId: string) => void;
@@ -39,13 +39,13 @@ export const usePlanStore = create<PlanState>((set, get) => ({
     }
   },
 
-  setRestaurant: (id: string) =>
+  setRestaurant: (id: string, clearDishes = true) =>
     set((state) => {
       if (!state.currentPlan) return state;
       const newPlan = {
         ...state.currentPlan,
         restaurantId: id,
-        selectedDishes: []
+        selectedDishes: clearDishes ? [] : state.currentPlan.selectedDishes
       };
       saveDiningPlan(newPlan);
       return { currentPlan: newPlan };

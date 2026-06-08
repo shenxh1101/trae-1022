@@ -96,7 +96,7 @@ export default function Home() {
               <div
                 key={restaurant.id}
                 style={{ animationDelay: `${index * 0.05}s` }}
-                className="animate-slide-up opacity-0"
+                className="animate-slide-up"
               >
                 <RestaurantCard restaurant={restaurant} />
               </div>
