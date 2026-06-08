@@ -73,7 +73,7 @@ export default function Home() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         {/* Filter Section */}
-        <div className="md:pt-0 pt-24">
+        <div className="mb-6">
           <FilterBar />
         </div>
 

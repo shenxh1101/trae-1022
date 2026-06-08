@@ -34,12 +34,18 @@ export default function Menu() {
     }
   }, [restaurant, navigate]);
 
+  useEffect(() => {
+    if (id && currentPlan && currentPlan.restaurantId && currentPlan.restaurantId !== id && currentPlan.selectedDishes.length > 0) {
+      setRestaurant(id, true);
+    }
+  }, [id, currentPlan?.restaurantId, currentPlan?.selectedDishes?.length, setRestaurant, navigate]);
+
   const handleDishSelect = (dishId: string) => {
     if (isDishSelected(dishId)) {
       removeDish(dishId);
     } else {
       if (id && currentPlan?.restaurantId !== id) {
-        setRestaurant(id, false);
+        setRestaurant(id, true);
       }
       addDish(dishId);
     }

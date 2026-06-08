@@ -17,7 +17,7 @@ export default function RestaurantDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { getRestaurantById, getMenuByRestaurantId, favorites, toggleFavorite } = useRestaurantStore();
-  const { setRestaurant } = usePlanStore();
+  const { initPlan, setRestaurant } = usePlanStore();
   const [activeTab, setActiveTab] = useState('info');
 
   const restaurant = id ? getRestaurantById(id) : undefined;
@@ -33,8 +33,11 @@ export default function RestaurantDetail() {
 
   const handleAddToPlan = () => {
     if (restaurant) {
-      setRestaurant(restaurant.id);
-      navigate('/plan');
+      initPlan();
+      setTimeout(() => {
+        setRestaurant(restaurant.id);
+        navigate('/plan');
+      }, 0);
     }
   };
 
